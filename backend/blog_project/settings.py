@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,3 +127,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+JAZZMIN_SETTINGS = {
+    "site_title": "我的博客后台",
+    "site_header": "博客管理",
+    "welcome_sign": "欢迎回来！",
+    "copyright": "My Blog Ltd.",
+    "theme": "flatly",
+}

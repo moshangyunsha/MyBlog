@@ -4,6 +4,15 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(max_length = 10,unique = True)
 
+    parent = models.ForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null = True,
+        blank = True,
+        related_name='children',
+        verbose_name="父分类"
+    )
+    
     class Meta:
         verbose_name= "分类"
         verbose_name_plural = verbose_name
@@ -24,7 +33,7 @@ class Tag(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length = 50)
-    context = models.TextField()
+    content = models.TextField()
     create_time = models.DateTimeField(auto_now_add=True)
     last_change_time = models.DateTimeField(auto_now=True)
 
