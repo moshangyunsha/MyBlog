@@ -1,8 +1,14 @@
 from rest_framework import serializers
 from .models import Post,Category,Tag
 
-# Category 序列化器
+# Category 序列化器::支持递归嵌套
+class RecursiveCategorySerializer(serializers.Serializer):
+    # 用于递归地序列化父分类
+    def to_representation(self, value):
+        serializer = self.parent.__class__(value,context=self.context)
+        return serializer.data
 class CategorySerializer(serializers.ModelSerializer):
+    parent = RecursiveCategorySerializer(read_only=True)
     class Meta:
         model = Category
         fields = ['id','name','parent']
