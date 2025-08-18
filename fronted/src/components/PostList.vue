@@ -1,12 +1,13 @@
 <template>
-    <div class="post-list">
-        <h2>文章列表</h2>
+    <el-container class="post-list">
+        <el-header></el-header>
 
+        <el-main>
         <div v-if="isLoading" class="loading">正在加载文章/Posts are loading...</div>
         <div v-else-if="error" class="error">{{ error }}</div>
 
         <div v-else>
-            <div v-for="post in psots" :key="post.id" class="post-item">
+            <div v-for="post in posts" :key="post.id" class="post-item">
                 <h4>{{ post.title }}</h4>
                 
                 <p class="post-meta">
@@ -15,11 +16,13 @@
                 </p>
 
                 <div class="post-content">
-                    <p>{{ post.context }}</p>
+                    <p>{{ post.content }}</p>
                 </div>
             </div>
         </div>
-    </div>
+
+        </el-main>
+    </el-container>
 </template>
 
 <script setup>
@@ -27,7 +30,7 @@
     import axios from 'axios';
 
     // 创建响应式变量存储文章列表
-    const psots = ref([]);
+    const posts = ref([]);
     const isLoading = ref(true); // 用于显示加载状态
     const error = ref(null); // 用于存放错误信息
 
@@ -36,11 +39,11 @@
         try{
             const response = await axios.get('http://127.0.0.1:8000/api/posts');
 
-            psots.value = response.data;
+            posts.value = response.data;
             console.log('成功获取文章数据：',response.data);
         }catch(err){
             console.error('获取文章数据失败：',err);
-            err.value = "无法获取文章列表，请稍后再试。";
+            error.value = "无法获取文章列表，请稍后再试。";
         }finally{
             isLoading.value = false;
         }

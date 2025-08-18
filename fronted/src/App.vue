@@ -3,19 +3,18 @@
 </script>
 
 <template>
-  <header>
-    <h1>MyBlog</h1>
-  </header>
+  <el-container class="OuterCon">
+    <el-header class="bg-gray-100 text-center p-4 border-b border-gray-200">
+      <h3>MyBlog</h3>
+    </el-header>
 
-  <main>
-    <PostList />
-  </main>
+    <el-main><PostList /></el-main>
+
+    <el-footer  class="text-center text-gray-500 p-4 border-t border-gray-200">
+      <h5>@2025 我的博客</h5>
+    </el-footer>
+  </el-container>
 </template>
 
 <style scoped>
-header {
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid #eee;
-}
 </style>
